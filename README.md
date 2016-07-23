@@ -1,2 +1,2 @@
 # quadrotor_moveit
-Quadrotor motion planning using moveit
+Quadrotor/Quadcopter Motion Planning using MoveIt!
