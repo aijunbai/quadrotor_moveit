@@ -1,0 +1,24 @@
+joint_limits:
+  virtual_joint:
+    trans_x:
+        max_velocity: 0.5
+        max_acceleration: 0.04
+    trans_y:
+        max_velocity: 0.5
+        max_acceleration: 0.04
+    trans_z:
+        min_position: 0.0
+        max_velocity: 0.5
+        max_acceleration: 0.04
+    rot_x: 
+        max_velocity: 0.5
+        max_acceleration: 0.04
+    rot_y: 
+        max_velocity: 0.5
+        max_acceleration: 0.04
+    rot_z: 
+        max_velocity: 0.5
+        max_acceleration: 0.04
+    rot_w: 
+        max_velocity: 0.5
+        max_acceleration: 0.04

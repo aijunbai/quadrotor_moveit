@@ -1,0 +1,37 @@
+<launch>
+  <arg name="db" default="false" />
+  <arg name="rviz" default="false" />
+  <arg name="debug" default="false" />
+
+  <include file="$(find quadrotor_moveit)/launch/setup.launch"/>
+
+  <node pkg="action_controller" type="actionController" name="action_controller" output="screen"/>
+
+  <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
+  <include file="$(find quadrotor_moveit)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="false"/>
+  </include>
+
+  <!-- We do not have a robot connected, so publish fake joint states -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="/use_gui" value="false"/> 
+    <!-- rosparam param="/source_list">[/move_group/fake_controller_joint_states]</rosparam -->
+  </node>
+  
+  <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
+  <include file="$(find quadrotor_moveit)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>  
+    <arg name="fake_execution" value="false"/>
+    <arg name="info" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <!-- Run Rviz and load the default config to see the state of the move_group node -->
+  <include file="$(find quadrotor_moveit)/launch/moveit_rviz.launch" if="$(arg rviz)">
+    <arg name="config" value="true"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  <!-- If database loading was enabled, start mongodb as well -->
+  <include file="$(find quadrotor_moveit)/launch/default_warehouse_db.launch" if="$(arg db)"/>
+</launch>

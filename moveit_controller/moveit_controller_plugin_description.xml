@@ -1,0 +1,10 @@
+<library path="libmoveit_controller">
+
+  <class name="moveit_controller/MoveItSimpleControllerManager"
+         type="moveit_controller::MoveItSimpleControllerManager"
+         base_class_type="moveit_controller_manager::MoveItControllerManager">
+    <description>
+    </description>
+  </class>
+
+</library>
